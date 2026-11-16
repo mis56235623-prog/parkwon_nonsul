@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>논술 통합 플래너 · 2027학년도</title>
+<style>
+:root{
+  --ink:#1c2430;--mute:#5b6675;--line:#d9dee6;--bg:#f4f5f7;--paper:#fff;
+  --accent:#1f4e79;--soft:#eef3f8;--warm:#fff6ec;--warmline:#f0d9bd;
+  --ok:#2a7a3f;--oksoft:#e8f4ea;--bad:#b3402e;
+  --gc:#1f6fb2;--sw:#2a7a3f;--kt:#b0641a;--kg:#7a3fa0;--aj:#b3402e;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--accent)}
+header.top{position:sticky;top:0;z-index:20;background:var(--accent);color:#fff}
+.topin{max-width:1080px;margin:0 auto;padding:8px 14px;display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.topin::-webkit-scrollbar{display:none}
+.brand{font-weight:700;white-space:nowrap;margin-right:8px}
+.tab{appearance:none;border:0;background:transparent;color:#dbe6f1;font:inherit;font-weight:600;padding:8px 14px;border-radius:999px;white-space:nowrap;cursor:pointer}
+.tab.on{background:#fff;color:var(--accent)}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #f2b84b;outline-offset:2px}
+main{max-width:1080px;margin:0 auto;padding:18px 14px 90px}
+.view{display:none}.view.on{display:block}
+h1{font-size:1.45rem;margin:.2em 0 .1em;line-height:1.3}
+h2{font-size:1.15rem;margin:1.8em 0 .6em;padding-bottom:4px;border-bottom:2px solid var(--accent)}
+h3{font-size:1rem;margin:1.1em 0 .4em}
+p{margin:.4em 0}
+.lead{color:var(--mute);margin:0 0 .8em}
+.note{background:var(--warm);border:1px solid var(--warmline);border-radius:8px;padding:9px 13px;font-size:.92rem;margin:.7em 0}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+.u{display:inline-block;font-size:.8rem;font-weight:700;color:#fff;border-radius:6px;padding:1px 8px;white-space:nowrap}
+.u.gc{background:var(--gc)}.u.sw{background:var(--sw)}.u.kt{background:var(--kt)}.u.kg{background:var(--kg)}.u.aj{background:var(--aj)}
+.bd-gc{border-left:5px solid var(--gc)}.bd-sw{border-left:5px solid var(--sw)}.bd-kt{border-left:5px solid var(--kt)}.bd-kg{border-left:5px solid var(--kg)}.bd-aj{border-left:5px solid var(--aj)}
+
+/* D-day */
+.dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0}
+.ddc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.ddc .n{font-size:1.7rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+.ddc .n.past{color:var(--mute)}
+.ddc small{display:block;color:var(--mute);font-size:.85rem}
+.ddc input{width:100%;font:inherit;font-size:.9rem;border:1px solid var(--line);border-radius:6px;padding:4px 6px;margin-top:6px;background:#fff;color:var(--ink)}
+.ddc label{font-size:.78rem;color:var(--mute);display:block;margin-top:6px}
+.bar{height:10px;background:#e3e7ee;border-radius:99px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:99px}
+
+/* plan */
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.92rem;margin:8px 0}
+.ctl select,.ctl button,.btn{font:inherit;font-size:.92rem;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.day{display:grid;grid-template-columns:108px 1fr;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0}
+.day.today{border:2px solid var(--accent)}
+.day.exam{background:#fdf1ef;border-color:#eec3bc}
+.day .d{font-weight:700;font-variant-numeric:tabular-nums}
+.day .d small{display:block;font-weight:500;color:var(--mute);font-size:.82rem}
+.task{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:4px 0}
+.task label{display:flex;gap:8px;align-items:center;cursor:pointer;flex:1 1 240px}
+.task input[type=checkbox],.rrow input[type=checkbox]{width:20px;height:20px;accent-color:var(--ok);flex:none}
+.task .tm{color:var(--mute);font-size:.85rem;white-space:nowrap}
+.tag{display:inline-block;font-size:.78rem;border-radius:6px;padding:1px 7px;background:var(--soft);color:var(--accent);font-weight:600;white-space:nowrap}
+.tag.ok{background:var(--oksoft);color:var(--ok)}
+.task.done .nm{text-decoration:line-through;color:var(--mute)}
+.tag.x{background:#fbe4e0;color:var(--bad)}
+.tag.rv{background:var(--warm);color:#8a5a12}
+.empty{color:var(--mute);font-size:.92rem}
+
+/* rounds */
+.ucard{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}
+.uhead{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.uhead b{font-size:1.05rem}
+.uhead>span{color:var(--mute);font-size:.88rem}
+.rrow{display:grid;grid-template-columns:28px minmax(150px,1.5fr) 118px 124px minmax(110px,1.6fr) 40px;gap:8px;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:.93rem}
+.rrow.done .rn{color:var(--mute)}
+.rrow .rn small{display:block;color:var(--mute);font-size:.82rem}
+.rrow input[type=number],.rrow input[type=text]{width:100%;font:inherit;font-size:.9rem;border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:#fff;color:var(--ink)}
+.rrow .sc{display:flex;align-items:center;gap:4px;font-size:.82rem;color:var(--mute);white-space:nowrap}
+.rrow .sc input{min-width:0;flex:1}
+@media(max-width:720px){
+  .rrow{grid-template-columns:28px 1fr 60px}
+  .rrow .sc,.rrow .tmn,.rrow .mm{grid-column:2 / -1}
+  .day{grid-template-columns:1fr}
+}
+
+/* tables */
+.tw{overflow-x:auto;margin:.6em 0;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+tr:last-child td,tr:last-child th{border-bottom:0}
+th:last-child,td:last-child{border-right:0}
+thead th{background:var(--soft);white-space:nowrap;position:sticky;top:0}
+tbody th{background:#fafbfc;white-space:nowrap;font-weight:600}
+.cmp{min-width:900px}.cmp td{min-width:150px}
+.mx{min-width:640px}.mx td{text-align:center;font-size:1rem}
+.mx td.l{text-align:left;font-size:.9rem}
+.hi{color:var(--ok);font-weight:800}.mid{color:#8a5a12}.lo{color:#b9c0cb}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:12px}
+.fc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.fc h3{margin:.1em 0 .4em;color:var(--accent)}
+.fc ul{margin:.2em 0;padding-left:1.15em}
+.fc li{margin:.25em 0;font-size:.93rem}
+.fc .say{background:var(--soft);border-radius:8px;padding:6px 10px;font-size:.88rem;margin-top:8px}
+.fc .us{margin-top:6px;display:flex;gap:4px;flex-wrap:wrap}
+code,.m{font-family:"Cambria Math","Times New Roman",serif;font-size:1.05em;font-style:normal;background:none;white-space:nowrap}
+
+/* wrong-answer note */
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}
+.form label{display:block;font-size:.82rem;color:var(--mute)}
+.form input,.form select,.form textarea{width:100%;font:inherit;font-size:.93rem;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff;color:var(--ink)}
+.form .wide{grid-column:1 / -1}
+.wn{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0}
+.wn.solved{opacity:.6}
+.wn .h{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.wn .h b{font-size:.98rem}
+.wn .h .sp{flex:1}
+.wn p{margin:.35em 0 0;white-space:pre-wrap;font-size:.93rem}
+.steps{margin:0;padding-left:1.4em}.steps>li{margin:.5em 0}.steps ul{margin:.3em 0;padding-left:1.2em}
+.wn .due{font-size:.85rem;color:var(--mute)}
+.wn .due.now{color:var(--bad);font-weight:700}
+.stat{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.stat span{background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:.88rem}
+.stat b{font-variant-numeric:tabular-nums}
+.mini{font-size:.82rem;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:6px;padding:3px 9px;cursor:pointer;font-family:inherit}
+footer{color:var(--mute);font-size:.85rem;margin-top:30px}
+@media print{header.top,.ctl,.form,.mini,.noprint{display:none!important}.view{display:block!important}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin" role="tablist">
+  <span class="brand">논술 통합 플래너</span>
+  <button class="tab on" data-v="plan" role="tab">오늘·계획</button>
+  <button class="tab" data-v="rounds" role="tab">회차 기록</button>
+  <button class="tab" data-v="cmp" role="tab">5개 대학 비교</button>
+  <button class="tab" data-v="core" role="tab">빈출 개념·공식</button>
+  <button class="tab" data-v="wrong" role="tab">오답 노트</button>
+  <button class="tab" data-v="help" role="tab">사용법</button>
+</div></header>
+
+<main>
+<!-- ===================== 오늘·계획 ===================== -->
+<section class="view on" id="v-plan">
+  <h1>오늘 할 일</h1>
+  <p class="lead"><span id="todayLine"></span> · 처음이라면 <a href="#help" id="goHelp">사용법</a>을 먼저 보세요.</p>
+  <div id="banner"></div>
+  <div class="box" id="todayBox"></div>
+
+  <h2>시험까지 남은 날</h2>
+  <div class="dd" id="dd"></div>
+  <div class="note">고사일은 2026년 6~9월 언론·입시 정리 자료 기준으로 넣어 둔 값입니다. 가천대는 모집단위에 따라 11/29·11/30·12/1로 갈리고, 아주대는 단과대학에 따라 12/5 오전 9시 또는 오후 2시입니다. <b>수험표와 입학처 공지를 보고 위 날짜 칸을 직접 고쳐 주세요.</b> 날짜를 바꾸면 아래 계획이 다시 짜입니다.</div>
+
+  <h2>날짜별 계획</h2>
+  <div class="ctl">
+    <label>하루에 풀 회차 수
+      <select id="cap"><option value="1">1회</option><option value="2">2회</option><option value="3">3회</option></select>
+    </label>
+    <span class="empty">시험이 가까운 대학부터, 각 자료가 권하는 순서대로 배정합니다. 날짜가 모자라 남는 회차는 그 대학 시험 전날에 더 넣습니다.</span>
+  </div>
+  <div id="plan"></div>
+  <div id="left"></div>
+</section>
+
+<!-- ===================== 회차 기록 ===================== -->
+<section class="view" id="v-rounds">
+  <h1>회차 기록</h1>
+  <p class="lead">예상문제 22회의 완료 여부, 점수, 걸린 시간을 적습니다. "열기"를 누르면 해당 회차 자료가 새 탭에서 열립니다.</p>
+  <div class="box"><b id="totLine"></b><div class="bar"><i id="totBar"></i></div></div>
+  <div id="rounds"></div>
+  <h2 class="noprint">기록 백업</h2>
+  <p class="empty noprint">기록은 이 기기의 이 브라우저에만 저장됩니다. 브라우저 기록을 지우면 함께 사라지므로 가끔 내보내 두세요. 다른 기기로 옮길 때도 이 파일을 씁니다.</p>
+  <div class="ctl noprint">
+    <button class="btn" id="rst">완료 체크 모두 지우기</button>
+    <button class="btn" id="exp">기록 내보내기</button>
+    <label class="btn">기록 가져오기<input type="file" id="imp" accept="application/json,.json" hidden></label>
+  </div>
+</section>
+
+<!-- ===================== 비교 ===================== -->
+<section class="view" id="v-cmp">
+  <h1>5개 대학 한 장 비교</h1>
+  <p class="lead">시험 순서대로 놓았습니다. 시험 전날 자기 전에 해당 대학 칸만 한 번 읽습니다.</p>
+  <div class="tw"><table class="cmp">
+    <thead><tr><th></th>
+      <th><span class="u sw">수원대</span></th><th><span class="u kt">한국기술교육대</span></th><th><span class="u kg">경기대</span></th><th><span class="u gc">가천대</span></th><th><span class="u aj">아주대</span></th></tr></thead>
+    <tbody>
+    <tr><th>고사일</th><td id="c-sw"></td><td id="c-kt"></td><td id="c-kg"></td><td id="c-gc"></td><td id="c-aj"></td></tr>
+    <tr><th>시험 시간</th><td>80분</td><td>80분</td><td>100분</td><td>80분</td><td>120분</td></tr>
+    <tr><th>문항</th><td>국어 5 + 수학 10 = 15문항</td><td>수학 10문항<br>(9·10번에 소문항)</td><td>수학 2문항<br>(문항마다 소문항 2개)</td><td>국어 5 + 수학 8 = 13문항<br>(작년까지 15문항)</td><td>수학 2문항<br>(소문항 여러 개)</td></tr>
+    <tr><th>배점</th><td>문항당 10점, 150점</td><td>100점<br>1·2번 4 / 3~5번 8 / 6~8번 12 / 9·10번 16</td><td>100점<br>문항당 40~60점</td><td>문항당 10점, 130점<br>(수학 80 · 국어 50)</td><td>100점<br>문항당 50점</td></tr>
+    <tr><th>수학 범위</th><td>수학Ⅰ·Ⅱ</td><td>수학Ⅰ·Ⅱ</td><td>수학(고1)·수학Ⅰ·Ⅱ<br>미적분·확통·기하 과목 제외</td><td>수학Ⅰ·Ⅱ<br>EBS 수능특강 연계</td><td>수학Ⅰ·Ⅱ에 더해 미적분(변곡점, 치환·부분적분, 수열의 극한)과 경우의 수까지</td></tr>
+    <tr><th>국어</th><td>있음. 독서 3 + 문학 2<br>빈칸에 "찾아 쓰시오"</td><td>없음</td><td>없음</td><td>있음. 화작 1, 독서 2~3, 문학 1~2<br>낱말·어절 단답</td><td>없음</td></tr>
+    <tr><th>문제 성격</th><td>약술형. 한 문항에 한 가지를 묻고 "과정을 논술하시오"</td><td>약술형과 서술형 사이. 번호별 단원이 거의 고정</td><td>교과서 제시문 (가)(나) + 논제. 실생활 상황을 식으로</td><td>약술형. "구하는 과정을 서술하시오"</td><td>정통 수리논술. 새 정의, 증명, "극한을 조사하시오"</td></tr>
+    <tr><th>권장 시간 배분</th><td>국어 15~20분 → 수학 55분 → 검토 5분</td><td>1~5번 25분 → 6~8번 27분 → 9·10번 28분</td><td>문항 1 40분 이내 → 문항 2 60분</td><td>국어 15분 → 쉬운 수학 5개 30분 → 남은 3개 25분 → 검토 10분</td><td>문항당 50분 → 남은 20분에 막힌 소문항</td></tr>
+    <tr><th>답안에서 꼭 지킬 것</th>
+      <td>국어는 지문 낱말 그대로, 줄여 쓰면 감점. 어절 수·글자 수 유의 사항에 밑줄부터.</td>
+      <td>답안은 문항 번호 칸의 실선 안에만. 칸 밖은 채점하지 않음. 9·10번 (1)은 반드시 끝내기.</td>
+      <td>"(가)에 의하여"처럼 제시문을 쓴 곳을 밝히기. 소문항 (1)(2)를 정해진 답란에. 답란을 틀리면 0점 사례 있음.</td>
+      <td>국어는 정확히 일치해야 점수. 수학은 중간 식에 점수가 더 큼. 마지막 줄은 "따라서 ~은 ~이다."</td>
+      <td>(1)의 결과를 뒤에서 쓰므로 (1) 검산 뒤 이동. "조사하시오"는 수렴 여부와 극한값을 모두.</td></tr>
+    <tr><th>가장 먼저 볼 유형</th>
+      <td>14·15번 적분 두 문항, 11번 곱의 미분과 미분계수</td>
+      <td>극한 조건으로 다항함수 결정, 구간별 함수의 연속·미분가능</td>
+      <td>경우의 수 분류, 삼각함수와 좌표평면 도형(원, 사인법칙)</td>
+      <td>삼각함수 변환·최대최소, 극한으로 함수 구하기, 지수·로그 개수 세기</td>
+      <td>지수·로그함수의 변곡점과 넓이, 격자점 개수 세기와 그 극한</td></tr>
+    <tr><th>수능 최저</th><td>모집요강에서 확인</td><td>없음</td><td>없음</td><td>있음. 기준은 모집요강에서 확인</td><td>자연계열 없음<br>(의학·약학만 있음)</td></tr>
+    <tr><th>반영</th><td>모집요강에서 확인</td><td>논술 100%</td><td>논술 90 + 교과 10</td><td>논술 100%</td><td>모집요강에서 확인</td></tr>
+    <tr><th>준비물·기타</th><td>입학처 공지 확인</td><td>컴퓨터용 사인펜(표기용), 검정 샤프나 연필(답안용), 지우개</td><td>수원캠퍼스. 고사장 조회는 11/20 무렵 공지</td><td>모집단위별로 날짜가 다름</td><td>단과대학별로 오전·오후가 다름</td></tr>
+    <tr><th>예상문제</th><td>3회 · 1→2→3</td><td>4회 · 1→2→3→4</td><td>5회 · 1→2→3→4→5</td><td>4회 · 1→3→4→2</td><td>6회 · 6→1→2→3→4→5</td></tr>
+    </tbody></table></div>
+  <div class="note">이 표는 폴더의 다섯 자료에 정리된 내용을 옮긴 것입니다. 고사일·고사장·입실 시각·준비물·수능 최저는 대학이 바꿀 수 있으니 수험표와 입학처 공지가 기준입니다.</div>
+
+  <h2>다섯 시험에 모두 통하는 답안 원칙</h2>
+  <div class="box"><ul style="margin:0;padding-left:1.2em">
+    <li><b>답만 쓰면 점수가 거의 없습니다.</b> 다섯 대학 모두 단계마다 부분 점수를 줍니다. 한 줄에 한 단계씩 씁니다.</li>
+    <li><b>막혀도 식을 세운 데까지 남깁니다.</b> 치환, 식의 꼴, 좌표 설정 같은 첫 단계에 점수가 있습니다.</li>
+    <li><b>값을 버리거나 고를 때는 이유를 씁니다.</b> "a&gt;0이므로 a=2"처럼 어떤 조건으로 골랐는지에 배점이 있습니다.</li>
+    <li><b>구하라는 것을 마지막에 다시 읽습니다.</b> 값인지, 개수인지, "모두"인지. 끝 줄은 "따라서 ~이다."</li>
+    <li><b>그림이 없는 문제는 그림부터 그립니다.</b> 근거는 그림이 아니라 식과 문장으로 씁니다.</li>
+  </ul></div>
+</section>
+
+<!-- ===================== 빈출 개념 ===================== -->
+<section class="view" id="v-core">
+  <h1>공통 빈출 개념과 공식</h1>
+  <p class="lead">다섯 자료의 기출 분석과 출제 예상을 한 표로 겹쳐 보았습니다. 위에 있을수록 여러 대학에 겹치므로 먼저 다집니다.</p>
+  <div class="tw"><table class="mx">
+    <thead><tr><th>단원·유형</th><th><span class="u sw">수원</span></th><th><span class="u kt">한기</span></th><th><span class="u kg">경기</span></th><th><span class="u gc">가천</span></th><th><span class="u aj">아주</span></th><th>한 줄 요약</th></tr></thead>
+    <tbody id="mx"></tbody></table></div>
+  <p class="empty"><span class="hi">●</span> 거의 매년 나옴 &nbsp; <span class="mid">○</span> 가끔 나오거나 다른 유형에 섞여 나옴 &nbsp; <span class="lo">·</span> 자료에서 보이지 않음. 표시는 각 자료의 분석을 옮긴 것이며 실제 출제를 보장하지 않습니다.</p>
+
+  <h2>꼭 손에 붙어 있어야 할 공식</h2>
+  <div class="fgrid" id="fg"></div>
+</section>
+
+<!-- ===================== 오답 노트 ===================== -->
+<section class="view" id="v-wrong">
+  <h1>오답·약점 노트</h1>
+  <p class="lead">회차를 채점한 직후에 틀린 문항을 적습니다. 원인을 고르는 것이 핵심입니다. 같은 원인이 쌓이면 그것이 약점입니다.</p>
+  <div class="box">
+    <div class="form">
+      <div><label for="w-u">대학</label><select id="w-u"></select></div>
+      <div><label for="w-r">회차</label><select id="w-r"></select></div>
+      <div><label for="w-q">문항</label><input id="w-q" type="text" placeholder="예: 11번, 2-1 (2)"></div>
+      <div><label for="w-t">단원</label><select id="w-t"></select></div>
+      <div><label for="w-c">틀린 원인</label><select id="w-c"></select></div>
+      <div><label for="w-d">다시 풀 날</label><input id="w-d" type="date"></div>
+      <div class="wide"><label for="w-m">무엇을 놓쳤나 (한두 줄)</label><textarea id="w-m" rows="2" placeholder="예: 분모→0이면 분자→0이라는 문장을 안 써서 2점 감점"></textarea></div>
+      <div><button class="btn pri" id="w-add">노트에 추가</button></div>
+    </div>
+  </div>
+  <div class="stat" id="w-stat"></div>
+  <div class="ctl">
+    <label>보기 <select id="w-f"><option value="open">안 끝난 것만</option><option value="due">오늘 다시 풀 것</option><option value="all">전체</option></select></label>
+    <label>대학 <select id="w-fu"></select></label>
+  </div>
+  <div id="w-list"></div>
+</section>
+
+<!-- ===================== 사용법 ===================== -->
+<section class="view" id="v-help">
+  <h1>사용법</h1>
+  <p class="lead">매일 아래 네 단계만 반복하면 됩니다. 한 회차에 문제 풀이, 채점, 오답 정리까지 2~3시간쯤 걸립니다.</p>
+
+  <h2>매일 하는 순서</h2>
+  <div class="box"><ol class="steps">
+    <li><b>"오늘·계획" 탭을 엽니다.</b> 맨 위 "오늘 할 일"에 오늘 풀 회차가 나옵니다.</li>
+    <li><b>회차 옆의 "열기"를 누릅니다.</b> 그 대학 자료의 해당 회차가 새 탭에서 열립니다. 자료 안의 타이머를 켜고 실제 시험 시간에 맞춰 종이에 풉니다.</li>
+    <li><b>다 풀면 자료의 "정답과 상세 풀이"로 채점합니다.</b> 답이 맞았는지보다 채점 기준의 단계가 내 답안에 있는지를 봅니다.</li>
+    <li><b>이 플래너로 돌아와 세 가지를 적습니다.</b>
+      <ul>
+        <li>오늘 할 일에서 그 회차를 <b>체크</b>합니다.</li>
+        <li>"회차 기록" 탭에 <b>점수와 걸린 시간</b>을 적습니다.</li>
+        <li>"오답 노트" 탭에 <b>틀린 문항</b>을 적습니다.</li>
+      </ul></li>
+  </ol></div>
+
+  <h2>탭마다 하는 일</h2>
+  <div class="fgrid">
+    <div class="fc"><h3>오늘·계획</h3><ul>
+      <li>오늘 풀 회차와 대학별 남은 날(D-day)을 봅니다.</li>
+      <li>푼 회차는 네모 칸을 눌러 체크합니다. 잘못 눌렀으면 한 번 더 누르면 풀립니다.</li>
+      <li>고사일이 다르면 대학 카드의 "고사일 고치기" 칸에서 날짜를 바꿉니다. 계획이 그 날짜에 맞춰 다시 짜입니다.</li>
+      <li>"하루에 풀 회차 수"로 하루 분량을 1~3회로 바꿀 수 있습니다.</li>
+      <li>분홍색 칸은 시험일, "○○대 전날" 표시는 그날 밤 다시 볼 것입니다.</li>
+    </ul></div>
+    <div class="fc"><h3>회차 기록</h3><ul>
+      <li>회차마다 점수, 걸린 시간(분), 한 줄 메모를 적습니다. 적는 즉시 저장됩니다.</li>
+      <li>점수를 적으면 대학별 평균이 오른쪽 위에 나옵니다.</li>
+      <li>계획과 상관없이 아무 회차나 먼저 풀고 여기서 체크해도 됩니다.</li>
+      <li>"완료 체크 모두 지우기"는 체크만 지웁니다. 점수와 오답 노트는 남습니다.</li>
+    </ul></div>
+    <div class="fc"><h3>5개 대학 비교</h3><ul>
+      <li>시험 시간, 문항 수, 배점, 시간 배분, 답안 유의점을 한 표로 봅니다.</li>
+      <li>표가 화면보다 넓으면 좌우로 밀어서 봅니다.</li>
+      <li>시험 전날 밤에 그 대학 칸만 위에서 아래로 한 번 읽습니다.</li>
+    </ul></div>
+    <div class="fc"><h3>빈출 개념·공식</h3><ul>
+      <li>위쪽 표는 어느 단원이 어느 대학에 나오는지입니다. ●가 많은 줄부터 다집니다.</li>
+      <li>아래 카드는 단원별 공식과 "답안에 쓰는 말"입니다. 카드 아래 색 표시가 그 단원이 나오는 대학입니다.</li>
+      <li>시험 전날에는 그 대학 색이 붙은 카드만 봅니다.</li>
+    </ul></div>
+    <div class="fc"><h3>오답 노트</h3><ul>
+      <li>대학, 회차, 문항 번호를 고르고 <b>틀린 원인</b>을 고른 뒤 "노트에 추가"를 누릅니다. 문항 번호는 꼭 적어야 추가됩니다.</li>
+      <li>"다시 풀 날"은 이틀 뒤로 들어가 있습니다. 그날이 되면 "오늘 할 일"에 빨간 표시로 알려 줍니다.</li>
+      <li>다시 풀어서 맞히면 "다시 풀어 맞힘"을 누릅니다.</li>
+      <li>위쪽 숫자에서 가장 많이 쌓인 원인과 단원이 지금의 약점입니다.</li>
+    </ul></div>
+    <div class="fc"><h3>자료 파일(대학별 5개)</h3><ul>
+      <li>자료마다 맨 위에 "전략"과 "1회, 2회…" 탭이 있습니다.</li>
+      <li>첫 회차를 풀기 전에 그 대학의 "전략" 탭을 한 번 읽습니다.</li>
+      <li>문제에 그림이 없으면 직접 그려 가며 풉니다.</li>
+    </ul></div>
+  </div>
+
+  <h2>자주 생기는 일</h2>
+  <div class="tw"><table>
+    <thead><tr><th>이럴 때</th><th>이렇게</th></tr></thead>
+    <tbody>
+      <tr><th>체크를 잘못 눌렀다</th><td>같은 칸을 한 번 더 누릅니다. 여러 개를 잘못 눌렀으면 "회차 기록" 탭 아래의 "완료 체크 모두 지우기"를 누릅니다.</td></tr>
+      <tr><th>하루를 못 풀고 넘겼다</th><td>그대로 두면 됩니다. 안 푼 회차는 다음 날 계획에 자동으로 다시 들어갑니다.</td></tr>
+      <tr><th>계획에 없는 회차를 먼저 풀었다</th><td>"회차 기록" 탭에서 그 회차를 체크합니다.</td></tr>
+      <tr><th>"열기"를 눌러도 안 열린다</th><td>이 파일과 대학별 자료 5개가 같은 폴더에 있어야 합니다. 파일 이름을 바꾸지 않았는지도 확인합니다.</td></tr>
+      <tr><th>PC에서 쓰다가 태블릿에서 쓰고 싶다</th><td>기록은 기기마다 따로 저장됩니다. "회차 기록" 탭 아래에서 "기록 내보내기"로 파일을 만들고, 다른 기기에서 "기록 가져오기"로 그 파일을 고릅니다. 폴더 전체도 그 기기로 옮겨야 합니다.</td></tr>
+      <tr><th>기록이 갑자기 다 사라졌다</th><td>브라우저 사용 기록을 지우면 함께 지워집니다. 며칠에 한 번 "기록 내보내기"를 해 두면 "기록 가져오기"로 되살릴 수 있습니다.</td></tr>
+      <tr><th>종이로 보고 싶다</th><td>Ctrl+P를 누르면 모든 탭 내용이 이어서 인쇄됩니다.</td></tr>
+    </tbody></table></div>
+  <div class="note">고사일, 입실 시각, 고사장, 준비물은 반드시 수험표와 각 대학 입학처 공지로 확인합니다. 이 플래너에 들어 있는 날짜는 미리 넣어 둔 값입니다.</div>
+</section>
+
+<footer>폴더의 다섯 대비 자료(가천대·수원대·아주대·한국기술교육대·경기대)와 같은 폴더에 두고 씁니다. 자료 파일의 이름을 바꾸면 "열기" 링크가 끊어집니다.</footer>
+</main>
+
+<script>
+(function(){
+'use strict';
+/* ---------- 데이터 ---------- */
+var U = {
+  sw:{name:'수원대', file:'수원대_논술_대비.html', exam:'2026-11-21', when:'자연계열', min:80, max:150, hash:function(n){return 'r'+n},
+      rounds:[[1,'2026학년도 본고사형','최우선'],[2,'2025학년도 본고사형','문학: 현대시'],[3,'2024학년도 본고사형','']],
+      eve:'세 회차의 11번, 14번, 15번과 국어 유의 사항만 다시 보기'},
+  kt:{name:'한국기술교육대', file:'한기대_수리논술_대비.html', exam:'2026-11-25', when:'오전·오후 나눠 실시', min:80, max:100, hash:function(n){return 'r'+n},
+      rounds:[[1,'2027 모의논술 연계형','최우선'],[2,'2026학년도 본고사형','속도와 거리, 접선과 넓이'],[3,'2025학년도 본고사형',''],[4,'2024학년도 본고사형','']],
+      eve:'1·2번 지수·로그 빠르게 풀기, 극한 답안 문장("분모→0이고 극한값이 존재하므로 분자→0") 다시 쓰기'},
+  kg:{name:'경기대', file:'경기대_수리논술_대비.html', exam:'2026-11-27', when:'수원캠퍼스', min:100, max:100, hash:function(n){return 'r'+n},
+      rounds:[[1,'2026년 모의논술 연계형','최우선'],[2,'2026 본고사 A형 유형','경우의 수, 접선과 원'],[3,'2026 본고사 B형 유형','등비·상용로그, 넓이 등분'],[4,'2025 본고사 A형 유형','삼각함수, 수열의 합'],[5,'2025 본고사 B형 + 모의','속도와 정적분']],
+      eve:'"(가)에 의하여" 쓰는 연습, 틀린 소문항을 답안 형식 안 보고 다시 쓰기'},
+  gc:{name:'가천대', file:'가천대_논술_대비.html', exam:'2026-12-01', when:'자연계열 대부분. 일부 모집단위는 11/29·11/30', min:80, max:130, hash:function(n){return 'r'+n},
+      rounds:[[1,'2027 모의논술 연계형','최우선'],[3,'2026 모의논술형','표준'],[4,'2024·2022 본고사형','기본 다지기'],[2,'2025 본고사형','가장 어려움']],
+      eve:'국어 "첫·마지막 어절" 조건 확인 연습, 삼각함수 변환 공식, 틀린 수학 문항의 중간 식 다시 쓰기'},
+  aj:{name:'아주대', file:'아주대_논술_대비.html', exam:'2026-12-05', when:'단과대학에 따라 09:00 또는 14:00', min:120, max:100, hash:function(n){return 'set-'+n},
+      rounds:[[6,'2027 모의논술 연계형','최우선'],[1,'2026형','접선과 넓이의 극한, 격자점'],[2,'2025형','난이도 중하'],[3,'2024형','max 함수, 개수 세기'],[4,'2023형','난이도 중상'],[5,'2022형','가장 어려움']],
+      eve:'올해 모의논술 채점기준 다시 읽기, 각 회차 (1) 소문항만 빠르게 다시 풀기'}
+};
+var ORDER = ['sw','kt','kg','gc','aj'];
+var SUNEUNG = '2026-11-19';
+var WD = ['일','월','화','수','목','금','토'];
+var TOPICS = ['지수·로그','삼각함수','사인·코사인법칙','수열','함수의 극한','연속·미분가능','미분(접선·극값)','정적분·넓이','속도와 거리','경우의 수','원·직선 도형','수열의 극한','국어','기타'];
+var CAUSES = ['개념을 몰랐음','풀이 방향을 못 잡음','계산 실수','조건을 빠뜨림','서술이 부족함','시간이 모자람'];
+
+/* ---------- 저장 ---------- */
+var KEY = 'nonsul-planner-v1', mem = null;
+function load(){
+  var s = null;
+  try{ s = JSON.parse(localStorage.getItem(KEY)); }catch(e){}
+  s = s || mem || {};
+  s.exam = s.exam || {}; s.done = s.done || {}; s.rec = s.rec || {}; s.wrong = s.wrong || []; s.cap = s.cap || 2;
+  return s;
+}
+var S = load();
+function save(){ mem = S; try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* ---------- 날짜 ---------- */
+function pd(s){ var a = s.split('-'); return new Date(+a[0], +a[1]-1, +a[2]); }
+function fd(d){ return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+function add(s,n){ var d = pd(s); d.setDate(d.getDate()+n); return fd(d); }
+function diff(a,b){ return Math.round((pd(b)-pd(a))/86400000); }
+function nice(s){ var d = pd(s); return (d.getMonth()+1)+'/'+d.getDate()+' ('+WD[d.getDay()]+')'; }
+var TODAY = fd(new Date());
+function exam(u){ return S.exam[u] || U[u].exam; }
+function rid(u,n){ return u+'-'+n; }
+
+/* ---------- 작은 도구 ---------- */
+function el(tag, attrs, kids){
+  var e = document.createElement(tag), k;
+  if(attrs) for(k in attrs){
+    if(k==='text') e.textContent = attrs[k];
+    else if(k==='cls') e.className = attrs[k];
+    else if(k.slice(0,2)==='on') e.addEventListener(k.slice(2), attrs[k]);
+    else if(attrs[k]!==false && attrs[k]!=null) e.setAttribute(k, attrs[k]===true?'':attrs[k]);
+  }
+  (kids||[]).forEach(function(c){ if(c!=null) e.appendChild(typeof c==='string'?document.createTextNode(c):c); });
+  return e;
+}
+function $(id){ return document.getElementById(id); }
+function clear(n){ while(n.firstChild) n.removeChild(n.firstChild); return n; }
+function badge(u){ return el('span',{cls:'u '+u,text:U[u].name}); }
+function link(u,n){ return el('a',{href:encodeURI(U[u].file)+'#'+U[u].hash(n),target:'_blank',rel:'noopener',text:'열기'}); }
+function roundInfo(u,n){ var r = U[u].rounds.filter(function(x){return x[0]===n})[0]; return r; }
+
+/* ---------- 계획 짜기 ---------- */
+function buildPlan(){
+  var start = TODAY > SUNEUNG ? TODAY : add(SUNEUNG,1);
+  var last = ORDER.map(exam).sort().pop();
+  var rem = {}; ORDER.forEach(function(u){ rem[u] = U[u].rounds.filter(function(r){ var dn = S.done[rid(u,r[0])]; return !dn || dn >= TODAY; }).map(function(r){return r[0]}); });
+  var days = [], d = start, guard = 0;
+  while(d <= last && guard++ < 120){
+    var exams = ORDER.filter(function(u){ return exam(u)===d; });
+    var eves = ORDER.filter(function(u){ return exam(u)===add(d,1); });
+    var tasks = [], slots = exams.length ? 0 : S.cap;
+    while(slots > 0){
+      var cand = ORDER.filter(function(u){ return rem[u].length && exam(u) > d; })
+                      .sort(function(a,b){ return exam(a) < exam(b) ? -1 : exam(a) > exam(b) ? 1 : 0; });
+      if(!cand.length) break;
+      tasks.push([cand[0], rem[cand[0]].shift()]); slots--;
+    }
+    days.push({date:d, exams:exams, eves:eves, tasks:tasks});
+    d = add(d,1);
+  }
+  /* 하루 회차 수를 넘겨 남은 회차는 그 대학 시험 전날(시험일이 아닌 가장 가까운 날)에 더 넣는다 */
+  var left = [];
+  ORDER.forEach(function(u){
+    if(!rem[u].length || exam(u) < TODAY) return;
+    var before = days.filter(function(x){ return x.date < exam(u); });
+    var free = before.filter(function(x){ return !x.exams.length; });
+    var slot = free.length ? free[free.length-1] : before[before.length-1];
+    rem[u].forEach(function(n){ if(slot) slot.tasks.push([u,n]); else left.push([u,n]); });
+    rem[u] = [];
+  });
+  return {days:days, left:left, start:start};
+}
+
+function taskRow(u,n){
+  var r = roundInfo(u,n), id = rid(u,n);
+  var cb = el('input',{type:'checkbox',checked:!!S.done[id],onchange:function(){ toggle(id,this.checked); }});
+  return el('div',{cls:'task'+(S.done[id]?' done':'')},[
+    el('label',null,[cb, badge(u), el('span',{cls:'nm',text:n+'회 · '+r[1]})]),
+    S.done[id] ? el('span',{cls:'tag ok',text:'완료'}) : null,
+    r[2] ? el('span',{cls:'tag',text:r[2]}) : null,
+    el('span',{cls:'tm',text:U[u].min+'분'}),
+    link(u,n)
+  ]);
+}
+function toggle(id,on){
+  if(on){ S.done[id] = TODAY; } else { delete S.done[id]; }
+  save(); renderAll();
+}
+
+function renderPlan(){
+  var P = buildPlan();
+  var t = pd(TODAY);
+  $('todayLine').textContent = t.getFullYear()+'년 '+(t.getMonth()+1)+'월 '+t.getDate()+'일 '+WD[t.getDay()]+'요일';
+  var ban = clear($('banner'));
+  var ds = diff(TODAY, SUNEUNG);
+  if(ds > 0) ban.appendChild(el('div',{cls:'note'},[el('b',{text:'수능 D-'+ds+'. '}),'지금은 수능에만 집중합니다. 논술 계획은 수능 다음 날('+nice(add(SUNEUNG,1))+')부터 시작하도록 짜 두었습니다.']));
+  else if(ds === 0) ban.appendChild(el('div',{cls:'note'},[el('b',{text:'오늘은 수능일입니다. '}),'논술은 내일부터 시작합니다.']));
+
+  var tb = clear($('todayBox'));
+  var today = P.days.filter(function(x){ return x.date===TODAY; })[0];
+  if(!today){
+    tb.appendChild(el('p',{cls:'empty',text: TODAY < P.start ? '아직 논술 계획이 시작되지 않았습니다. 아래에서 시작일 이후 계획을 미리 볼 수 있습니다.' : '모든 시험 일정이 끝났습니다. 정말 수고 많았습니다.'}));
+  }else{
+    today.exams.forEach(function(u){ tb.appendChild(el('p',null,[badge(u),' ',el('b',{text:'오늘이 시험일입니다.'}),' 새 문제는 풀지 않습니다. 수험표, 신분증, 필기구를 챙기고 일찍 출발합니다.'])); });
+    today.tasks.forEach(function(x){ tb.appendChild(taskRow(x[0],x[1])); });
+    today.eves.forEach(function(u){ tb.appendChild(el('p',null,[el('span',{cls:'tag rv',text:'내일 '+U[u].name+' 시험'}),' '+U[u].eve])); });
+    if(!today.exams.length && !today.tasks.length && !today.eves.length) tb.appendChild(el('p',{cls:'empty',text:'오늘 배정된 회차가 없습니다. 오답 노트의 "오늘 다시 풀 것"을 봅니다.'}));
+    var due = S.wrong.filter(function(w){ return !w.ok && w.due && w.due <= TODAY; }).length;
+    if(due) tb.appendChild(el('p',null,[el('span',{cls:'tag x',text:'오답 '+due+'개'}),' 오늘까지 다시 풀기로 한 문항이 있습니다.']));
+  }
+
+  /* D-day */
+  var dd = clear($('dd'));
+  ORDER.forEach(function(u){
+    var n = diff(TODAY, exam(u));
+    var done = U[u].rounds.filter(function(r){ return S.done[rid(u,r[0])]; }).length, tot = U[u].rounds.length;
+    var inp = el('input',{type:'date',value:exam(u),id:'ex-'+u,onchange:function(){ if(this.value){ S.exam[u] = this.value; save(); renderAll(); } }});
+    dd.appendChild(el('div',{cls:'ddc bd-'+u},[
+      badge(u),
+      el('div',{cls:'n'+(n<0?' past':''),text: n>0 ? 'D-'+n : n===0 ? 'D-DAY' : '종료'}),
+      el('small',{text:nice(exam(u))+' · '+U[u].min+'분'}),
+      el('small',{text:U[u].when}),
+      el('div',{cls:'bar'},[el('i',{style:'width:'+(done/tot*100)+'%'})]),
+      el('small',{text:'예상문제 '+done+' / '+tot+'회'}),
+      el('label',{for:'ex-'+u,text:'고사일 고치기'}), inp
+    ]));
+    var c = $('c-'+u); if(c){ clear(c); c.appendChild(el('b',{text:nice(exam(u))})); c.appendChild(el('br')); c.appendChild(document.createTextNode(U[u].when)); }
+  });
+
+  /* 날짜별 */
+  var pl = clear($('plan'));
+  P.days.forEach(function(x){
+    var body = el('div');
+    x.exams.forEach(function(u){ body.appendChild(el('div',{cls:'task'},[badge(u),el('b',{text:' 시험일'}),el('span',{cls:'tm',text:U[u].min+'분 · '+U[u].when})])); });
+    x.tasks.forEach(function(t){ body.appendChild(taskRow(t[0],t[1])); });
+    x.eves.forEach(function(u){ body.appendChild(el('div',{cls:'task'},[el('span',{cls:'tag rv',text:U[u].name+' 전날'}),el('span',{text:U[u].eve})])); });
+    if(!body.firstChild) body.appendChild(el('span',{cls:'empty',text:'여유일. 오답 노트 다시 풀기'}));
+    var n = diff(TODAY,x.date);
+    pl.appendChild(el('div',{cls:'day'+(x.date===TODAY?' today':'')+(x.exams.length?' exam':'')},[
+      el('div',{cls:'d'},[nice(x.date), el('small',{text: n===0?'오늘':n===1?'내일':n+'일 뒤'})]), body ]));
+  });
+  var lf = clear($('left'));
+  if(P.left.length){
+    lf.appendChild(el('h3',{text:'날짜가 모자라 배정하지 못한 회차'}));
+    lf.appendChild(el('p',{cls:'empty',text:'시험 전에 남은 날이 없어 계획에 넣지 못했습니다. 여유가 생기면 풀고, 아니면 건너뛰어도 됩니다.'}));
+    var b = el('div',{cls:'box'}); P.left.forEach(function(t){ b.appendChild(taskRow(t[0],t[1])); }); lf.appendChild(b);
+  }
+}
+
+/* ---------- 회차 기록 ---------- */
+function renderRounds(){
+  var box = clear($('rounds')), totD = 0, tot = 0;
+  ORDER.forEach(function(u){
+    var done = 0, sum = 0, cnt = 0;
+    var card = el('div',{cls:'ucard bd-'+u});
+    var rows = U[u].rounds.map(function(r){
+      var id = rid(u,r[0]), rec = S.rec[id] || {}, isDone = !!S.done[id];
+      tot++; if(isDone){ done++; totD++; }
+      if(rec.score!=null && rec.score!==''){ sum += +rec.score; cnt++; }
+      function upd(k){ return function(){ S.rec[id] = S.rec[id] || {}; S.rec[id][k] = this.value; save(); renderHead(); }; }
+      return el('div',{cls:'rrow'+(isDone?' done':'')},[
+        el('input',{type:'checkbox',checked:isDone,'aria-label':U[u].name+' '+r[0]+'회 완료',onchange:function(){ toggle(id,this.checked); }}),
+        el('div',{cls:'rn'},[r[0]+'회 · '+r[1], el('small',{text:(r[2]||'')+(isDone?(r[2]?' · ':'')+nice(S.done[id])+' 완료':'')})]),
+        el('div',{cls:'sc'},[el('input',{type:'number',min:0,max:U[u].max,value:rec.score!=null?rec.score:'',placeholder:'점수','aria-label':'점수',onchange:upd('score')}),'/'+U[u].max]),
+        el('div',{cls:'sc tmn'},[el('input',{type:'number',min:0,max:300,value:rec.min!=null?rec.min:'',placeholder:'분','aria-label':'걸린 시간(분)',onchange:upd('min')}),'/'+U[u].min+'분']),
+        el('div',{cls:'mm'},[el('input',{type:'text',value:rec.memo||'',placeholder:'한 줄 메모','aria-label':'메모',onchange:upd('memo')})]),
+        link(u,r[0])
+      ]);
+    });
+    card.appendChild(el('div',{cls:'uhead'},[
+      el('div',null,[badge(u),' ',el('b',{text:done+' / '+U[u].rounds.length+'회'})]),
+      el('span',{id:'avg-'+u,text: cnt ? '평균 '+Math.round(sum/cnt*10)/10+' / '+U[u].max+'점' : '시험 '+nice(exam(u))+' · '+U[u].min+'분 · '+U[u].max+'점 만점'})
+    ]));
+    rows.forEach(function(r){ card.appendChild(r); });
+    box.appendChild(card);
+  });
+  $('totLine').textContent = '전체 '+totD+' / '+tot+'회 완료';
+  $('totBar').style.width = (totD/tot*100)+'%';
+}
+function renderHead(){
+  ORDER.forEach(function(u){
+    var sum = 0, cnt = 0;
+    U[u].rounds.forEach(function(r){ var rec = S.rec[rid(u,r[0])]; if(rec && rec.score!=null && rec.score!==''){ sum += +rec.score; cnt++; } });
+    var a = $('avg-'+u); if(a && cnt) a.textContent = '평균 '+Math.round(sum/cnt*10)/10+' / '+U[u].max+'점';
+  });
+}
+
+/* ---------- 빈출 표와 공식 ---------- */
+var MX = [
+ ['미분: 접선, 극값, 최대·최소', 2,2,2,2,2, '다섯 대학 모두. 삼차함수 식을 조건으로 정한 뒤 접선·극값을 묻는 흐름'],
+ ['정적분: 넓이, 적분으로 정의된 함수', 2,2,1,2,2, '수원 14·15번 고정, 한기 올해 모의 두 문항. 양변 미분과 x=a 대입'],
+ ['수열의 합(∑), 등차·등비, Sₙ→aₙ', 2,2,2,2,1, '부분분수로 지워지는 합, Sₙ−Sₙ₋₁, 귀납적 정의'],
+ ['삼각함수: 각 변환, 방정식, 최대·최소', 2,2,2,2,1, '가천 수학 첫 문항 단골. sin을 t로 치환한 이차식'],
+ ['지수·로그 계산, 방정식·부등식', 2,2,2,2,1, '한기 1·2번, 수원 6·7번, 가천은 개수 세기. 진수·밑 조건을 먼저 쓰기'],
+ ['지수·로그함수의 그래프', 2,2,1,2,2, '교점 개수, 그래프 위의 점. 아주는 극대점·변곡점·넓이까지'],
+ ['극한 조건으로 다항함수 결정', 2,2,1,2,0, '한기는 빠진 해가 없음. 차수 → 최고차 계수 → 인수 순서'],
+ ['구간별 함수의 연속·미분가능', 0,2,1,2,0, '한기 6~7번 자리, 가천 3년째. 좌극한 = 우극한 = 함숫값'],
+ ['사인법칙·코사인법칙, 삼각형 넓이', 1,0,2,2,1, '가천 모의 3년 연속, 경기 올해 모의. 외접원 반지름 R'],
+ ['속도와 거리', 1,2,1,1,0, '한기 3년 연속. 위치 변화 ∫v 와 움직인 거리 ∫|v| 구분'],
+ ['원과 직선, 점과 직선 사이의 거리', 0,0,2,0,2, '고1 도형. 경기와 아주에서 미분·극한과 결합'],
+ ['경우의 수, 조건에 맞는 개수 세기', 0,0,2,1,2, '경기 2년 연속 새 영역, 아주 격자점·함수 개수. 기준을 정해 분류'],
+ ['수열의 극한, "극한을 조사하시오"', 0,0,0,0,2, '아주 전용. 수렴 여부와 극한값을 둘 다, 0이 아닌 실수가 되는 지수 찾기'],
+ ['국어 약술(찾아 쓰기, 어절 조건)', 2,0,0,2,0, '수원·가천만. 지문 낱말 그대로, 어절 수와 글자 수 지키기']
+];
+var SYM = ['<span class="lo">·</span>','<span class="mid">○</span>','<span class="hi">●</span>'];
+function renderMx(){
+  var tb = clear($('mx'));
+  MX.forEach(function(r){
+    var tr = el('tr',null,[el('td',{cls:'l'},[el('b',{text:r[0]})])]);
+    for(var i=1;i<=5;i++){ var td = el('td'); td.innerHTML = SYM[r[i]]; tr.appendChild(td); }
+    tr.appendChild(el('td',{cls:'l',text:r[6]})); tb.appendChild(tr);
+  });
+}
+/* 공식 카드: 내용은 모두 이 파일에 고정된 글이라 innerHTML로 넣습니다. */
+var FM = [
+ {t:'지수·로그', us:['sw','kt','kg','gc','aj'], li:[
+   '<span class="m">log<sub>a</sub>b = log<sub>c</sub>b / log<sub>c</sub>a</span>, &nbsp;<span class="m">log<sub>a<sup>m</sup></sub>b<sup>n</sup> = (n/m)·log<sub>a</sub>b</span>',
+   '<span class="m">a<sup>log<sub>a</sub>b</sup> = b</span>, &nbsp;<span class="m">log<sub>a</sub>b · log<sub>b</sub>a = 1</span>',
+   '부등식: 밑이 1보다 크면 부등호 그대로, 0과 1 사이면 반대로',
+   '상용로그 자릿수: <span class="m">n ≤ log x &lt; n+1</span> 이면 정수 부분이 n+1자리'],
+  say:'답안 첫 줄에 "진수 조건에서 x&gt;0", "밑 조건에서 a&gt;0, a≠1"을 씁니다.'},
+ {t:'삼각함수', us:['sw','kt','kg','gc','aj'], li:[
+   '<span class="m">sin(π/2+θ) = cos θ</span>, &nbsp;<span class="m">cos(π/2+θ) = −sin θ</span>',
+   '<span class="m">sin(π+θ) = −sin θ</span>, &nbsp;<span class="m">cos(π+θ) = −cos θ</span>, &nbsp;<span class="m">tan(π+θ) = tan θ</span>',
+   '<span class="m">sin²θ + cos²θ = 1</span>, &nbsp;<span class="m">(sin θ + cos θ)² = 1 + 2 sin θ cos θ</span>',
+   '<span class="m">sin x = t</span> 로 치환하면 반드시 <span class="m">−1 ≤ t ≤ 1</span> 범위를 적기'],
+  say:'"θ가 제○사분면의 각이므로 sin θ &lt; 0"처럼 부호를 정한 이유를 씁니다.'},
+ {t:'사인법칙·코사인법칙', us:['kg','gc','sw','aj'], li:[
+   '<span class="m">a / sin A = b / sin B = c / sin C = 2R</span>',
+   '<span class="m">a² = b² + c² − 2bc·cos A</span>',
+   '넓이 <span class="m">S = (1/2)·bc·sin A</span>',
+   '원주각: 같은 호에 대한 원주각은 같다 (각이 일정한 점의 자취는 원)'],
+  say:'"삼각형 ABC에서 사인법칙에 의하여"라고 어느 삼각형인지 밝힙니다.'},
+ {t:'수열', us:['sw','kt','kg','gc','aj'], li:[
+   '등차: <span class="m">a<sub>n</sub> = a + (n−1)d</span>, &nbsp;<span class="m">S<sub>n</sub> = n(2a + (n−1)d)/2</span>',
+   '등비: <span class="m">a<sub>n</sub> = ar<sup>n−1</sup></span>, &nbsp;<span class="m">S<sub>n</sub> = a(r<sup>n</sup>−1)/(r−1)</span> <span class="m">(r≠1)</span>',
+   '<span class="m">a<sub>n</sub> = S<sub>n</sub> − S<sub>n−1</sub></span> <span class="m">(n ≥ 2)</span>, &nbsp;<span class="m">a<sub>1</sub> = S<sub>1</sub></span> 은 따로 확인',
+   '<span class="m">Σk = n(n+1)/2</span>, &nbsp;<span class="m">Σk² = n(n+1)(2n+1)/6</span>, &nbsp;<span class="m">Σk³ = {n(n+1)/2}²</span>',
+   '부분분수: <span class="m">1/{k(k+1)} = 1/k − 1/(k+1)</span>'],
+  say:'"n ≥ 2일 때"와 "n = 1일 때"를 나누어 쓰고, 일반항이 n=1에서도 맞는지 한 줄로 확인합니다.'},
+ {t:'함수의 극한과 다항함수 결정', us:['kt','gc','sw'], li:[
+   '<span class="m">lim<sub>x→∞</sub> f(x)/x<sup>n</sup> = k (k≠0)</span> 이면 f는 n차, 최고차 계수 k',
+   '<span class="m">lim<sub>x→a</sub> f(x)/(x−a) = k</span> 이면 <span class="m">f(a) = 0</span>, <span class="m">f′(a) = k</span>',
+   '무리식은 유리화, <span class="m">∞ − ∞</span> 꼴은 최고차로 묶기'],
+  say:'"(분모)→0이고 극한값이 존재하므로 (분자)→0이다." 이 문장을 그대로 씁니다.'},
+ {t:'연속과 미분가능', us:['kt','gc','kg'], li:[
+   '연속: <span class="m">lim<sub>x→a−</sub> f(x) = lim<sub>x→a+</sub> f(x) = f(a)</span>',
+   '미분가능: 연속이고, 좌미분계수 = 우미분계수',
+   '<span class="m">f(x)g(x)</span> 가 연속이려면 불연속점에서 다른 쪽 함숫값이 0인지 확인',
+   '분수 꼴은 분모가 0이 되지 않을 조건(판별식 &lt; 0)'],
+  say:'"x = a에서 연속이므로"라고 어느 점에서의 조건인지 밝히고 식을 세웁니다.'},
+ {t:'미분', us:['sw','kt','kg','gc','aj'], li:[
+   '접선: <span class="m">y − f(a) = f′(a)(x − a)</span>. 곡선 밖의 점에서 그을 때는 접점을 <span class="m">(t, f(t))</span>로',
+   '곱의 미분: <span class="m">{f(x)g(x)}′ = f′(x)g(x) + f(x)g′(x)</span>',
+   '극값: <span class="m">f′(a) = 0</span> 이고 그 앞뒤로 <span class="m">f′</span>의 부호가 바뀜',
+   '실근의 개수는 <span class="m">y = f(x)</span> 와 <span class="m">y = k</span> 의 교점 개수로',
+   '삼차함수가 극값을 갖는다 ⇔ <span class="m">f′(x) = 0</span> 의 판별식 &gt; 0'],
+  say:'증감표를 그리고 "x = 1에서 극소"라고 적습니다. 부호가 바뀌는 것을 보여야 점수가 납니다.'},
+ {t:'정적분', us:['sw','kt','gc','aj','kg'], li:[
+   '<span class="m">d/dx ∫<sub>a</sub><sup>x</sup> f(t)dt = f(x)</span>. 그다음 <span class="m">x = a</span> 를 대입해 상수 구하기',
+   '<span class="m">∫<sub>a</sub><sup>b</sup> f(t)dt</span> 는 상수이므로 k로 놓고 푼다',
+   '우함수 <span class="m">∫<sub>−a</sub><sup>a</sup> = 2∫<sub>0</sub><sup>a</sup></span>, 기함수 <span class="m">∫<sub>−a</sub><sup>a</sup> = 0</span>',
+   '포물선과 직선 사이 넓이: <span class="m">|a|(β−α)³/6</span>',
+   '넓이는 <span class="m">∫|f(x) − g(x)|dx</span>. 교점과 위아래 관계를 먼저 쓰기'],
+  say:'"양변을 x에 대하여 미분하면", "양변에 x = a를 대입하면" 두 문장이 한 묶음입니다.'},
+ {t:'속도와 거리', us:['kt','sw','gc','kg'], li:[
+   '<span class="m">v(t) = x′(t)</span>, &nbsp;<span class="m">a(t) = v′(t)</span>',
+   '위치의 변화량 <span class="m">∫<sub>a</sub><sup>b</sup> v(t)dt</span>, 움직인 거리 <span class="m">∫<sub>a</sub><sup>b</sup> |v(t)|dt</span>',
+   '운동 방향이 바뀌는 때: <span class="m">v(t) = 0</span> 이고 부호가 바뀜'],
+  say:'움직인 거리는 v의 부호가 바뀌는 시각에서 구간을 나누어 적분합니다.'},
+ {t:'원·직선과 경우의 수', us:['kg','aj'], li:[
+   '점 <span class="m">(x₁, y₁)</span>과 직선 <span class="m">ax+by+c=0</span> 사이 거리: <span class="m">|ax₁+by₁+c| / √(a²+b²)</span>',
+   '원과 직선이 접한다 ⇔ (중심과 직선 사이의 거리) = 반지름',
+   '<span class="m"><sub>n</sub>C<sub>r</sub> = n! / {r!(n−r)!}</span>, 합의 법칙(동시에 안 일어남)과 곱의 법칙(잇달아 일어남)',
+   '개수 세기는 기준(곡선 도로 횟수, x좌표 등)을 하나 정해 경우를 나누고 표로 정리'],
+  say:'"(ⅰ) ~인 경우, (ⅱ) ~인 경우"로 나누고 마지막에 "합의 법칙에 의하여"로 더합니다.'},
+ {t:'아주대용: 미적분 도구', us:['aj'], li:[
+   '<span class="m">(e<sup>x</sup>)′ = e<sup>x</sup></span>, &nbsp;<span class="m">(ln x)′ = 1/x</span>, 합성함수와 몫의 미분',
+   '변곡점: <span class="m">f″(a) = 0</span> 이고 그 앞뒤로 <span class="m">f″</span>의 부호가 바뀜',
+   '부분적분 <span class="m">∫f g′ = f g − ∫f′ g</span>, 치환적분',
+   '<span class="m">lim<sub>x→0</sub> sin x / x = 1</span>, &nbsp;<span class="m">lim<sub>n→∞</sub> r<sup>n</sup></span> 은 <span class="m">|r|&lt;1</span> 이면 0',
+   '<span class="m">t<sup>k</sup></span> 로 나눈 극한이 0이 아닌 실수 ⇒ 분자의 최저차(또는 최고차) 지수와 k를 맞춘다'],
+  say:'"수렴한다 / 발산한다"를 먼저 쓰고 수렴하면 극한값까지 씁니다.'},
+ {t:'국어 약술 (수원·가천)', us:['sw','gc'], li:[
+   '&lt;보기&gt;와 유의 사항을 지문보다 먼저 읽기',
+   '"찾아 쓰시오"는 지문의 낱말 그대로. 줄이거나 바꾸면 감점',
+   '"첫 어절과 마지막 어절"은 순서와 맞춤법까지 정확히',
+   '"○자 이내", "시행 하나", "두 어절" 조건에 밑줄을 긋고 시작',
+   '보기에서 고르는 문항은 순서가 바뀌면 0점일 수 있음'],
+  say:'국어는 15~20분 안에 끝내고 수학에 시간을 남깁니다.'}
+];
+function renderFm(){
+  var g = clear($('fg'));
+  FM.forEach(function(f){
+    var c = el('div',{cls:'fc'},[el('h3',{text:f.t})]);
+    var ul = el('ul'); f.li.forEach(function(h){ var li = el('li'); li.innerHTML = h; ul.appendChild(li); }); c.appendChild(ul);
+    var s = el('div',{cls:'say'}); s.innerHTML = '<b>답안에 쓰는 말</b> · '+f.say; c.appendChild(s);
+    var us = el('div',{cls:'us'}); f.us.forEach(function(u){ us.appendChild(badge(u)); }); c.appendChild(us);
+    g.appendChild(c);
+  });
+}
+
+/* ---------- 오답 노트 ---------- */
+function fillSel(sel, opts, keep){
+  var v = keep ? sel.value : null; clear(sel);
+  opts.forEach(function(o){ sel.appendChild(el('option',{value:o[0],text:o[1]})); });
+  if(v!=null && opts.some(function(o){return String(o[0])===v})) sel.value = v;
+}
+function initWrong(){
+  fillSel($('w-u'), ORDER.map(function(u){ return [u,U[u].name]; }));
+  fillSel($('w-fu'), [['','전체']].concat(ORDER.map(function(u){ return [u,U[u].name]; })));
+  fillSel($('w-t'), TOPICS.map(function(t){ return [t,t]; }));
+  fillSel($('w-c'), CAUSES.map(function(t){ return [t,t]; }));
+  function rs(){ var u = $('w-u').value; fillSel($('w-r'), U[u].rounds.map(function(r){ return [r[0], r[0]+'회 · '+r[1]]; })); }
+  $('w-u').addEventListener('change', rs); rs();
+  $('w-d').value = add(TODAY,2);
+  $('w-add').addEventListener('click', function(){
+    var q = $('w-q').value.trim();
+    if(!q){ $('w-q').focus(); return; }
+    S.wrong.unshift({id:Date.now(), at:TODAY, u:$('w-u').value, r:+$('w-r').value, q:q, t:$('w-t').value, c:$('w-c').value, due:$('w-d').value, m:$('w-m').value.trim(), ok:false});
+    save(); $('w-q').value = ''; $('w-m').value = ''; renderWrong(); renderPlan();
+  });
+  $('w-f').addEventListener('change', renderWrong);
+  $('w-fu').addEventListener('change', renderWrong);
+}
+function renderWrong(){
+  var st = clear($('w-stat')), open = S.wrong.filter(function(w){ return !w.ok; });
+  st.appendChild(el('span',null,['남은 오답 ',el('b',{text:String(open.length)}),'개 / 전체 '+S.wrong.length+'개']));
+  var byC = {}, byT = {};
+  S.wrong.forEach(function(w){ byC[w.c] = (byC[w.c]||0)+1; byT[w.t] = (byT[w.t]||0)+1; });
+  function top(o){ return Object.keys(o).sort(function(a,b){ return o[b]-o[a]; }).slice(0,3); }
+  top(byC).forEach(function(k){ st.appendChild(el('span',null,['원인: '+k+' ',el('b',{text:String(byC[k])})])); });
+  top(byT).forEach(function(k){ st.appendChild(el('span',null,['단원: '+k+' ',el('b',{text:String(byT[k])})])); });
+
+  var f = $('w-f').value, fu = $('w-fu').value, box = clear($('w-list'));
+  var list = S.wrong.filter(function(w){
+    if(fu && w.u!==fu) return false;
+    if(f==='open') return !w.ok;
+    if(f==='due') return !w.ok && w.due && w.due <= TODAY;
+    return true;
+  });
+  if(!list.length){ box.appendChild(el('p',{cls:'empty',text: S.wrong.length ? '조건에 맞는 오답이 없습니다.' : '아직 적은 오답이 없습니다. 회차를 채점한 뒤 틀린 문항을 위에 적어 보세요.'})); return; }
+  list.forEach(function(w){
+    var late = !w.ok && w.due && w.due <= TODAY;
+    box.appendChild(el('div',{cls:'wn bd-'+w.u+(w.ok?' solved':'')},[
+      el('div',{cls:'h'},[
+        badge(w.u), el('b',{text:w.r+'회 '+w.q}), el('span',{cls:'tag',text:w.t}), el('span',{cls:'tag x',text:w.c}),
+        el('span',{cls:'sp'}),
+        el('span',{cls:'due'+(late?' now':''),text: w.ok ? '해결함' : w.due ? '다시 풀 날 '+nice(w.due) : ''}),
+        link(w.u,w.r),
+        el('button',{cls:'mini',text:w.ok?'되돌리기':'다시 풀어 맞힘',onclick:function(){ w.ok = !w.ok; save(); renderWrong(); renderPlan(); }}),
+        el('button',{cls:'mini',text:'삭제','aria-label':w.r+'회 '+w.q+' 삭제',onclick:function(){ if(confirm('이 오답 기록을 지울까요?')){ S.wrong = S.wrong.filter(function(x){ return x.id!==w.id; }); save(); renderWrong(); renderPlan(); } }})
+      ]),
+      w.m ? el('p',{text:w.m}) : null
+    ]));
+  });
+}
+
+/* ---------- 백업 ---------- */
+$('rst').addEventListener('click', function(){
+  if(confirm('모든 회차의 완료 체크를 지웁니다. 점수와 메모, 오답 노트는 그대로 둡니다. 계속할까요?')){ S.done = {}; save(); renderAll(); }
+});
+$('exp').addEventListener('click', function(){
+  var a = el('a',{href:URL.createObjectURL(new Blob([JSON.stringify(S,null,1)],{type:'application/json'})),download:'논술_플래너_기록_'+TODAY+'.json'});
+  document.body.appendChild(a); a.click(); a.remove();
+});
+$('imp').addEventListener('change', function(){
+  var f = this.files[0]; if(!f) return;
+  var rd = new FileReader();
+  rd.onload = function(){
+    try{
+      var o = JSON.parse(rd.result);
+      if(!o || typeof o!=='object' || !o.done || !Array.isArray(o.wrong)) throw 0;
+      if(!confirm('지금 기록을 이 파일의 기록으로 바꿉니다. 계속할까요?')) return;
+      localStorage.setItem(KEY, JSON.stringify(o)); mem = o; S = load(); renderAll(); renderWrong();
+    }catch(e){ alert('이 플래너에서 내보낸 기록 파일이 아닙니다.'); }
+  };
+  rd.readAsText(f); this.value = '';
+});
+
+/* ---------- 탭 ---------- */
+var tabs = document.querySelectorAll('.tab');
+function show(v){
+  for(var i=0;i<tabs.length;i++){ var on = tabs[i].getAttribute('data-v')===v; tabs[i].classList.toggle('on',on); tabs[i].setAttribute('aria-selected',on); }
+  var vs = document.querySelectorAll('.view'); for(i=0;i<vs.length;i++) vs[i].classList.toggle('on', vs[i].id==='v-'+v);
+  try{ history.replaceState(null,'','#'+v); }catch(e){}
+  window.scrollTo(0,0);
+}
+for(var i=0;i<tabs.length;i++) tabs[i].addEventListener('click', function(){ show(this.getAttribute('data-v')); });
+
+$('goHelp').addEventListener('click', function(e){ e.preventDefault(); show('help'); });
+function renderAll(){ renderPlan(); renderRounds(); }
+$('cap').value = String(S.cap);
+$('cap').addEventListener('change', function(){ S.cap = +this.value; save(); renderPlan(); });
+renderMx(); renderFm(); initWrong(); renderAll(); renderWrong();
+var h = (location.hash||'').slice(1);
+if(h && $('v-'+h)) show(h);
+})();
+</script>
+</body>
+</html>
