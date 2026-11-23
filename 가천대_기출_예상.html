@@ -135,6 +135,11 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 </style>
 <style>
 .origlink{word-break:break-all}
+.openrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+a.openbtn{display:inline-block;padding:10px 18px;border-radius:999px;background:var(--accent,#0b5d7a);color:#fff !important;font-weight:600;text-decoration:none;font-family:var(--ui,inherit);font-size:.95em}
+a.openbtn:hover{filter:brightness(1.1)}
+.opennote{font-size:.9em;opacity:.85}
+
 .origlink.off{color:inherit;text-decoration:none;pointer-events:none;font-weight:600}
 .panel ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
 </style>
@@ -205,8 +210,10 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g1" data-done="g1"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">80점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/가천대/2027%ED%95%99%EB%85%84%EB%8F%84%EB%85%BC%EC%88%A0%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_A%ED%98%95_%EC%9D%B8%EB%AC%B8%EC%9E%90%EC%97%B0(%EC%97%85%EB%A1%9C%EB%93%9C).pdf" target="_blank" rel="noopener">2027학년도논술모의고사_A형_인문자연(업로드).pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://admission.gachon.ac.kr/upload/BBS0004/20260828094227B86T77.PDF" target="_blank" rel="noopener">문제지 열기 (가천대 입학처)</a><a href="https://admission.gachon.ac.kr/admission/html/rolling/noticeView.asp?BOARD_IDX=32292" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">누르면 문제지 PDF가 바로 열립니다. 해설지는 게시글의 압축 파일 안에 있습니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/가천대/2027%ED%95%99%EB%85%84%EB%8F%84%EB%85%BC%EC%88%A0%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_A%ED%98%95_%EC%9D%B8%EB%AC%B8%EC%9E%90%EC%97%B0(%EC%97%85%EB%A1%9C%EB%93%9C).pdf" target="_blank" rel="noopener">2027학년도논술모의고사_A형_인문자연(업로드).pdf</a></p>
 <p><b>볼 쪽:</b> PDF 3~10쪽이 문제입니다(3~7쪽 국어 1~4번, 8~10쪽 수학 5~8번). 1쪽은 표지, 2쪽은 빈 쪽입니다. 문제지 아래에 인쇄된 쪽 번호로는 1~8쪽입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">영역</th><th scope="col">배점</th></tr></thead><tbody><tr><th scope="row">국어 1번</th><td>화법과 작문</td><td>10점</td></tr><tr><th scope="row">국어 2번</th><td>독서 · 과학</td><td>10점</td></tr><tr><th scope="row">국어 3번</th><td>독서 · 사회</td><td>10점</td></tr><tr><th scope="row">국어 4번</th><td>문학 · 고전 소설</td><td>10점</td></tr><tr><th scope="row">수학 5번</th><td>수학Ⅰ · 로그</td><td>10점</td></tr><tr><th scope="row">수학 6번</th><td>수학Ⅰ · 수열</td><td>10점</td></tr><tr><th scope="row">수학 7번</th><td>수학Ⅰ · 삼각함수</td><td>10점</td></tr><tr><th scope="row">수학 8번</th><td>수학Ⅱ · 미분</td><td>10점</td></tr></tbody></table></div>
 <p>국어 4문항, 수학 4문항입니다. 위의 타이머를 50분에 맞추고 풉니다. 올해 본고사는 13문항에 80분이므로, 8문항인 모의논술은 같은 속도인 50분으로 잡았습니다. 수학은 답만 쓰지 말고 구하는 과정을 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -436,8 +443,10 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g2" data-done="g2"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">80점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/가천대/2027%ED%95%99%EB%85%84%EB%8F%84%EB%85%BC%EC%88%A0%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_B%ED%98%95_%EC%9D%B8%EB%AC%B8%EC%9E%90%EC%97%B0(%EC%97%85%EB%A1%9C%EB%93%9C).pdf" target="_blank" rel="noopener">2027학년도논술모의고사_B형_인문자연(업로드).pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://admission.gachon.ac.kr/upload/BBS0004/20260828094227RHZADM.PDF" target="_blank" rel="noopener">문제지 열기 (가천대 입학처)</a><a href="https://admission.gachon.ac.kr/admission/html/rolling/noticeView.asp?BOARD_IDX=32292" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">누르면 문제지 PDF가 바로 열립니다. 해설지는 게시글의 압축 파일 안에 있습니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/가천대/2027%ED%95%99%EB%85%84%EB%8F%84%EB%85%BC%EC%88%A0%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_B%ED%98%95_%EC%9D%B8%EB%AC%B8%EC%9E%90%EC%97%B0(%EC%97%85%EB%A1%9C%EB%93%9C).pdf" target="_blank" rel="noopener">2027학년도논술모의고사_B형_인문자연(업로드).pdf</a></p>
 <p><b>볼 쪽:</b> PDF 3~8쪽이 국어 1~4번, 9~11쪽이 수학 5~8번입니다. 1쪽은 표지, 2쪽은 빈 쪽입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">영역</th><th scope="col">배점</th></tr></thead><tbody><tr><th scope="row">국어 1번</th><td>화법과 작문</td><td>10점</td></tr><tr><th scope="row">국어 2번</th><td>독서 · 사회(법)</td><td>10점</td></tr><tr><th scope="row">국어 3번</th><td>독서 · 과학기술</td><td>10점</td></tr><tr><th scope="row">국어 4번</th><td>문학 · 한시</td><td>10점</td></tr><tr><th scope="row">수학 5번</th><td>수학Ⅰ · 지수함수와 로그함수</td><td>10점</td></tr><tr><th scope="row">수학 6번</th><td>수학Ⅱ · 함수의 연속</td><td>10점</td></tr><tr><th scope="row">수학 7번</th><td>수학Ⅰ · 삼각함수</td><td>10점</td></tr><tr><th scope="row">수학 8번</th><td>수학Ⅱ · 미분과 적분</td><td>10점</td></tr></tbody></table></div>
 <p>국어 4문항, 수학 4문항입니다. 위의 타이머를 50분에 맞추고 풉니다. 올해 본고사는 13문항에 80분이므로, 8문항인 모의논술은 같은 속도인 50분으로 잡았습니다. 수학은 답만 쓰지 말고 구하는 과정을 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -674,8 +683,10 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g3" data-done="g3"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">150점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/가천대/2025%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%EA%B3%A0%EC%82%AC%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C_%EC%9E%90%EC%97%B0.pdf" target="_blank" rel="noopener">2025학년도 논술고사 기출문제_자연.pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://admission.gachon.ac.kr/admission/html/rolling/noticeView.asp?BOARD_IDX=24228" target="_blank" rel="noopener">문제지 받는 곳 (가천대 입학처 게시글)</a></p>
+<p class="opennote">가천대는 이 문제지를 압축 파일(zip)로만 올려 두었습니다. 게시글의 첨부 "2025학년도 논술고사 기출문제 및 해설_PDF.zip"을 받아 압축을 풀고, 그 안의 "기출문제_자연" PDF를 엽니다. 패드의 파일 앱에서 zip을 누르면 풀립니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/가천대/2025%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%EA%B3%A0%EC%82%AC%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C_%EC%9E%90%EC%97%B0.pdf" target="_blank" rel="noopener">2025학년도 논술고사 기출문제_자연.pdf</a></p>
 <p><b>볼 쪽:</b> 전체 16쪽입니다. 1~9쪽이 국어 1~6번, 10~16쪽이 수학 7~15번이며, 표지 없이 1쪽부터 바로 문제가 시작됩니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">영역</th><th scope="col">배점</th></tr></thead><tbody><tr><th scope="row">국어 1번</th><td>화법과 작문</td><td>10점</td></tr><tr><th scope="row">국어 2번</th><td>독서 · 과학 기술</td><td>10점</td></tr><tr><th scope="row">국어 3번</th><td>독서 · 과학 기술</td><td>10점</td></tr><tr><th scope="row">국어 4번</th><td>독서 · 인문</td><td>10점</td></tr><tr><th scope="row">국어 5번</th><td>문학 · 수필</td><td>10점</td></tr><tr><th scope="row">국어 6번</th><td>문학 · 현대시</td><td>10점</td></tr><tr><th scope="row">수학 7번</th><td>수학Ⅰ · 삼각함수</td><td>10점</td></tr><tr><th scope="row">수학 8번</th><td>수학Ⅰ · 지수와 로그</td><td>10점</td></tr><tr><th scope="row">수학 9번</th><td>수학Ⅱ · 정적분</td><td>10점</td></tr><tr><th scope="row">수학 10번</th><td>수학Ⅰ · 거듭제곱근</td><td>10점</td></tr><tr><th scope="row">수학 11번</th><td>수학Ⅱ · 함수의 극한</td><td>10점</td></tr><tr><th scope="row">수학 12번</th><td>수학Ⅱ · 방정식의 실근의 개수</td><td>10점</td></tr><tr><th scope="row">수학 13번</th><td>수학Ⅱ · 정적분, 수학Ⅰ · 등차수열</td><td>10점</td></tr><tr><th scope="row">수학 14번</th><td>수학Ⅱ · 극한과 적분</td><td>10점</td></tr><tr><th scope="row">수학 15번</th><td>수학Ⅰ · 삼각함수의 주기, 사인법칙</td><td>10점</td></tr></tbody></table></div>
 <p>국어 6문항, 수학 9문항입니다. 위의 타이머를 80분에 맞추고 풉니다. 실제 시험과 같은 80분입니다. 올해는 13문항이지만 이 해에는 15문항이었습니다. 수학은 답만 쓰지 말고 구하는 과정을 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -1093,8 +1104,10 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g4" data-done="g4"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">80점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/가천대/2026%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%20%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_A%ED%98%95.pdf" target="_blank" rel="noopener">2026학년도 논술 모의고사_A형.pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://admission.gachon.ac.kr/admission/html/rolling/noticeView.asp?BOARD_IDX=24228" target="_blank" rel="noopener">문제지 받는 곳 (가천대 입학처 게시글)</a></p>
+<p class="opennote">가천대는 이 문제지를 압축 파일(zip)로만 올려 두었습니다. 게시글의 첨부 "문제지및해설지_PDF.zip"을 받아 압축을 풀고, 그 안의 "논술 모의고사_A형" PDF를 엽니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/가천대/2026%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%20%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_A%ED%98%95.pdf" target="_blank" rel="noopener">2026학년도 논술 모의고사_A형.pdf</a></p>
 <p><b>볼 쪽:</b> PDF 1쪽은 표지이고, 2~6쪽(인쇄된 쪽 번호 1~5)이 국어 문제 1~4, 7~9쪽(쪽 번호 6~8)이 수학 문제 5~8이며, 10~11쪽은 빈 쪽입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">영역</th><th scope="col">배점</th></tr></thead><tbody><tr><th scope="row">국어 1번</th><td>화법과 작문</td><td>10점</td></tr><tr><th scope="row">국어 2번</th><td>독서 · 사회</td><td>10점</td></tr><tr><th scope="row">국어 3번</th><td>독서 · 기술</td><td>10점</td></tr><tr><th scope="row">국어 4번</th><td>문학 · 고전 시가</td><td>10점</td></tr><tr><th scope="row">수학 5번</th><td>수학Ⅰ · 지수와 로그</td><td>10점</td></tr><tr><th scope="row">수학 6번</th><td>수학Ⅱ · 함수의 연속</td><td>10점</td></tr><tr><th scope="row">수학 7번</th><td>수학Ⅰ · 사인법칙과 코사인법칙</td><td>10점</td></tr><tr><th scope="row">수학 8번</th><td>수학Ⅱ · 미분계수</td><td>10점</td></tr></tbody></table></div>
 <p>국어 4문항, 수학 4문항입니다. 위의 타이머를 50분에 맞추고 풉니다. 올해 본고사는 13문항에 80분이므로, 8문항인 모의논술은 같은 속도인 50분으로 잡았습니다. 수학은 답만 쓰지 말고 구하는 과정을 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -1329,8 +1342,10 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g5" data-done="g5"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">80점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/가천대/2026%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%20%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_B%ED%98%95.pdf" target="_blank" rel="noopener">2026학년도 논술 모의고사_B형.pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://admission.gachon.ac.kr/admission/html/rolling/noticeView.asp?BOARD_IDX=24228" target="_blank" rel="noopener">문제지 받는 곳 (가천대 입학처 게시글)</a></p>
+<p class="opennote">가천대는 이 문제지를 압축 파일(zip)로만 올려 두었습니다. 게시글의 첨부 "문제지및해설지_PDF.zip"을 받아 압축을 풀고, 그 안의 "논술 모의고사_B형" PDF를 엽니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/가천대/2026%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%20%EB%AA%A8%EC%9D%98%EA%B3%A0%EC%82%AC_B%ED%98%95.pdf" target="_blank" rel="noopener">2026학년도 논술 모의고사_B형.pdf</a></p>
 <p><b>볼 쪽:</b> 1쪽은 표지이고, 2~6쪽이 국어 1~4번(4번 소설은 5~6쪽에 걸쳐 있음), 7~9쪽이 수학 5~8번이며, 10~11쪽은 빈 쪽입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">영역</th><th scope="col">배점</th></tr></thead><tbody><tr><th scope="row">국어 1번</th><td>화법과 작문</td><td>10점</td></tr><tr><th scope="row">국어 2번</th><td>독서 · 사회</td><td>10점</td></tr><tr><th scope="row">국어 3번</th><td>독서 · 기술</td><td>10점</td></tr><tr><th scope="row">국어 4번</th><td>문학 · 현대 소설</td><td>10점</td></tr><tr><th scope="row">수학 5번</th><td>수학Ⅱ · 함수의 극한</td><td>10점</td></tr><tr><th scope="row">수학 6번</th><td>수학Ⅰ · 삼각함수</td><td>10점</td></tr><tr><th scope="row">수학 7번</th><td>수학Ⅱ · 정적분</td><td>10점</td></tr><tr><th scope="row">수학 8번</th><td>수학Ⅰ · 수열의 귀납적 정의</td><td>10점</td></tr></tbody></table></div>
 <p>국어 4문항, 수학 4문항입니다. 위의 타이머를 50분에 맞추고 풉니다. 올해 본고사는 13문항에 80분이므로, 8문항인 모의논술은 같은 속도인 50분으로 잡았습니다. 수학은 답만 쓰지 말고 구하는 과정을 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>

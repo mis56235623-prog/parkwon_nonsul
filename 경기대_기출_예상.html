@@ -137,6 +137,11 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 </style>
 <style>
 .origlink{word-break:break-all}
+.openrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+a.openbtn{display:inline-block;padding:10px 18px;border-radius:999px;background:var(--accent,#0b5d7a);color:#fff !important;font-weight:600;text-decoration:none;font-family:var(--ui,inherit);font-size:.95em}
+a.openbtn:hover{filter:brightness(1.1)}
+.opennote{font-size:.9em;opacity:.85}
+
 .origlink.off{color:inherit;text-decoration:none;pointer-events:none;font-weight:600}
 .panel ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
 </style>
@@ -210,8 +215,10 @@ div.q,div.sq{display:flex;flex-direction:column;gap:8px}
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g1" data-done="g1"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">100점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/경기대/%EA%B2%BD%EA%B8%B0%EB%8C%80%202026%20%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0%EA%B8%B0%EC%B6%9C(A).pdf" target="_blank" rel="noopener">경기대 2026 수리논술기출(A).pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&amp;SITE_NO=2&amp;BOARD_SEQ=6&amp;BBS_SEQ=3961&amp;FILE_SEQ=1" target="_blank" rel="noopener">문제지 열기 (경기대 입학처 보고서)</a><a href="https://enter.kyonggi.ac.kr/cms/FR_BBS_CON/BoardView.do?MENU_ID=330&amp;CONTENTS_NO=3&amp;SITE_NO=2&amp;BOARD_SEQ=6&amp;BBS_SEQ=3961" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">경기대는 2026학년도 기출을 따로 올리지 않아, 대학이 공개한 "선행학습 영향평가 보고서" 안에서 봅니다. 누르면 PDF가 패드에 내려받아집니다. 내려받은 파일을 열어서 봅니다. 파일이 크고(약 8MB), 수리논술 문항은 뒤쪽(107쪽 부근부터)에 있습니다. 문항 바로 뒤에 채점 기준과 예시 답안이 붙어 있으니 문제만 봅니다. 따로 받은 학원 문제지 PDF가 있으면 그쪽이 보기 편합니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/경기대/%EA%B2%BD%EA%B8%B0%EB%8C%80%202026%20%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0%EA%B8%B0%EC%B6%9C(A).pdf" target="_blank" rel="noopener">경기대 2026 수리논술기출(A).pdf</a></p>
 <p><b>볼 쪽:</b> 1~3쪽 전체가 문제입니다. 첫 쪽에 "제한시간 120분"이라고 적혀 있지만 학원 표지의 문구이고, 실제 시험은 100분입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">과목</th><th scope="col">배점</th><th scope="col">권장 시간</th></tr></thead><tbody><tr><th scope="row">문항 1</th><td>수학 · 수학Ⅰ</td><td>20 + 25점</td><td>40분</td></tr><tr><th scope="row">문항 2</th><td>수학 · 수학Ⅱ</td><td>25 + 30점</td><td>60분</td></tr></tbody></table></div>
 <p>위의 타이머를 100분에 맞추고, 실제 시험처럼 빈 종이에 풀이 과정을 문장으로 씁니다. 소문항 (1), (2)를 구분해서 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -458,8 +465,10 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g2" data-done="g2"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">100점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/경기대/%EA%B2%BD%EA%B8%B0%EB%8C%80%202026%20%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0%EA%B8%B0%EC%B6%9C(B).pdf" target="_blank" rel="noopener">경기대 2026 수리논술기출(B).pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&amp;SITE_NO=2&amp;BOARD_SEQ=6&amp;BBS_SEQ=3961&amp;FILE_SEQ=1" target="_blank" rel="noopener">문제지 열기 (경기대 입학처 보고서)</a><a href="https://enter.kyonggi.ac.kr/cms/FR_BBS_CON/BoardView.do?MENU_ID=330&amp;CONTENTS_NO=3&amp;SITE_NO=2&amp;BOARD_SEQ=6&amp;BBS_SEQ=3961" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">경기대는 2026학년도 기출을 따로 올리지 않아, 대학이 공개한 "선행학습 영향평가 보고서" 안에서 봅니다. 누르면 PDF가 패드에 내려받아집니다. 내려받은 파일을 열어서 봅니다. 파일이 크고(약 8MB), 수리논술 문항은 뒤쪽(107쪽 부근부터)에 있습니다. 문항 바로 뒤에 채점 기준과 예시 답안이 붙어 있으니 문제만 봅니다. 따로 받은 학원 문제지 PDF가 있으면 그쪽이 보기 편합니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/경기대/%EA%B2%BD%EA%B8%B0%EB%8C%80%202026%20%EC%88%98%EB%A6%AC%EB%85%BC%EC%88%A0%EA%B8%B0%EC%B6%9C(B).pdf" target="_blank" rel="noopener">경기대 2026 수리논술기출(B).pdf</a></p>
 <p><b>볼 쪽:</b> 1~3쪽 전체가 문제입니다. 표지의 "제한시간 120분"은 학원 표지 문구이고, 실제 시험은 100분입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">과목</th><th scope="col">배점</th><th scope="col">권장 시간</th></tr></thead><tbody><tr><th scope="row">문항 1</th><td>수학Ⅰ</td><td>20 + 30점</td><td>45분</td></tr><tr><th scope="row">문항 2</th><td>수학Ⅱ</td><td>20 + 30점</td><td>55분</td></tr></tbody></table></div>
 <p>위의 타이머를 100분에 맞추고, 실제 시험처럼 빈 종이에 풀이 과정을 문장으로 씁니다. 소문항 (1), (2)를 구분해서 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -710,8 +719,10 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g3" data-done="g3"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">100점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/경기대/2026%EB%85%84%20%EC%98%A8%EB%9D%BC%EC%9D%B8%20%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0%20%EB%AC%B8%EC%A0%9C%EC%A7%80_%EC%88%98%EB%A6%AC.pdf" target="_blank" rel="noopener">2026년 온라인 모의논술 문제지_수리.pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&amp;SITE_NO=2&amp;BOARD_SEQ=4&amp;BBS_SEQ=4047&amp;FILE_SEQ=2" target="_blank" rel="noopener">문제지 열기 (경기대 입학처)</a><a href="https://enter.kyonggi.ac.kr/cms/FR_BBS_CON/BoardView.do?MENU_ID=290&amp;CONTENTS_NO=1&amp;SITE_NO=2&amp;BOARD_SEQ=4&amp;BBS_SEQ=4047" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">누르면 PDF가 패드에 내려받아집니다. 내려받은 파일을 열어서 봅니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/경기대/2026%EB%85%84%20%EC%98%A8%EB%9D%BC%EC%9D%B8%20%EB%AA%A8%EC%9D%98%EB%85%BC%EC%88%A0%20%EB%AC%B8%EC%A0%9C%EC%A7%80_%EC%88%98%EB%A6%AC.pdf" target="_blank" rel="noopener">2026년 온라인 모의논술 문제지_수리.pdf</a></p>
 <p><b>볼 쪽:</b> 1~2쪽 전체가 문제입니다.</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">과목</th><th scope="col">배점</th><th scope="col">권장 시간</th></tr></thead><tbody><tr><th scope="row">문항 1</th><td>수학Ⅰ · 수학</td><td>20 + 30점</td><td>45분</td></tr><tr><th scope="row">문항 2</th><td>수학</td><td>15 + 35점</td><td>55분</td></tr></tbody></table></div>
 <p>위의 타이머를 100분에 맞추고, 실제 시험처럼 빈 종이에 풀이 과정을 문장으로 씁니다. 소문항 (1), (2)를 구분해서 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -1097,8 +1108,10 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g4" data-done="g4"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">100점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/경기대/2025%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%EA%B3%A0%EC%82%AC%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C(%EC%88%98%EB%A6%AC).pdf" target="_blank" rel="noopener">2025학년도 논술고사 기출문제(수리).pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&amp;SITE_NO=2&amp;BOARD_SEQ=4&amp;BBS_SEQ=4043&amp;FILE_SEQ=3" target="_blank" rel="noopener">문제지 열기 (경기대 입학처)</a><a href="https://enter.kyonggi.ac.kr/cms/FR_BBS_CON/BoardView.do?MENU_ID=290&amp;CONTENTS_NO=1&amp;SITE_NO=2&amp;BOARD_SEQ=4&amp;BBS_SEQ=4043" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">누르면 PDF가 패드에 내려받아집니다. 내려받은 파일을 열어서 봅니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/경기대/2025%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%EA%B3%A0%EC%82%AC%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C(%EC%88%98%EB%A6%AC).pdf" target="_blank" rel="noopener">2025학년도 논술고사 기출문제(수리).pdf</a></p>
 <p><b>볼 쪽:</b> 이 파일은 문제 바로 뒤에 채점 기준과 예시 답안이 붙어 있습니다. 문항 1은 1~2쪽, 문항 2는 6~7쪽의 "문항 및 제시문"만 보고 풉니다. 3~5쪽, 8~10쪽은 다 푼 뒤에 봅니다. (쪽 아래 번호로는 106~107쪽, 111~112쪽)</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">과목</th><th scope="col">배점</th><th scope="col">권장 시간</th></tr></thead><tbody><tr><th scope="row">문항 1</th><td>수학Ⅰ</td><td>15 + 20점</td><td>35분</td></tr><tr><th scope="row">문항 2</th><td>수학Ⅰ</td><td>25 + 40점</td><td>65분</td></tr></tbody></table></div>
 <p>위의 타이머를 100분에 맞추고, 실제 시험처럼 빈 종이에 풀이 과정을 문장으로 씁니다. 소문항 (1), (2)를 구분해서 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
@@ -1219,8 +1232,10 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 <button type="button" data-act="reset" class="ghost">처음으로</button><label class="done"><input type="checkbox" id="done-g5" data-done="g5"> 이 회차를 풀었음</label></div>
 <article class="paper">
 <h2>문제지 <span class="pts">100점</span></h2>
-<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. <b>원본 문제지 파일을 펴 놓고</b>(또는 인쇄해서) 풉니다.</p>
-<p><b>파일:</b> <a class="origlink" href="기출_원본/경기대/2025%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%EA%B3%A0%EC%82%AC%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C(%EC%88%98%EB%A6%AC).pdf" target="_blank" rel="noopener">2025학년도 논술고사 기출문제(수리).pdf</a></p>
+<p>기출 문제는 이 화면에 옮겨 적지 않았습니다. 아래 버튼으로 <b>대학 입학처의 문제지를 열어</b> 풉니다. 패드에서는 화면을 둘로 나누어 한쪽에 문제지, 한쪽에 이 페이지를 두면 편합니다.</p>
+<p class="openrow"><a class="openbtn" href="https://enter.kyonggi.ac.kr/ajaxfile/FR_SVC/FileDown.do?GBN=X01&amp;SITE_NO=2&amp;BOARD_SEQ=4&amp;BBS_SEQ=4043&amp;FILE_SEQ=3" target="_blank" rel="noopener">문제지 열기 (경기대 입학처)</a><a href="https://enter.kyonggi.ac.kr/cms/FR_BBS_CON/BoardView.do?MENU_ID=290&amp;CONTENTS_NO=1&amp;SITE_NO=2&amp;BOARD_SEQ=4&amp;BBS_SEQ=4043" target="_blank" rel="noopener">입학처 게시글 보기</a></p>
+<p class="opennote">누르면 PDF가 패드에 내려받아집니다. 내려받은 파일을 열어서 봅니다.</p>
+<p><b>받아 둔 파일이 있으면:</b> <a class="origlink" href="기출_원본/경기대/2025%ED%95%99%EB%85%84%EB%8F%84%20%EB%85%BC%EC%88%A0%EA%B3%A0%EC%82%AC%20%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C(%EC%88%98%EB%A6%AC).pdf" target="_blank" rel="noopener">2025학년도 논술고사 기출문제(수리).pdf</a></p>
 <p><b>볼 쪽:</b> 문항 1은 11~12쪽, 문항 2는 16~17쪽의 "문항 및 제시문"만 보고 풉니다. 13~15쪽, 18~19쪽(채점 기준과 예시 답안)은 다 푼 뒤에 봅니다. (쪽 아래 번호로는 116~117쪽, 121~122쪽)</p>
 <div class="tablewrap"><table><thead><tr><th scope="col">문항</th><th scope="col">과목</th><th scope="col">배점</th><th scope="col">권장 시간</th></tr></thead><tbody><tr><th scope="row">문항 1</th><td>수학 · 수학Ⅰ</td><td>15 + 25점</td><td>40분</td></tr><tr><th scope="row">문항 2</th><td>수학Ⅱ</td><td>60 (소문항 없음)점</td><td>60분</td></tr></tbody></table></div>
 <p>위의 타이머를 100분에 맞추고, 실제 시험처럼 빈 종이에 풀이 과정을 문장으로 씁니다. 소문항 (1), (2)를 구분해서 씁니다. 다 쓴 뒤에 아래 "정답과 상세 풀이"를 엽니다.</p>
